@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Visualizer</title>
+
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- Comparison Sidebar (Algorithm B) -->
+    <aside id="sidebar-b" class="hidden">
+
+      <div id="complexity-panel-b">
+        <div id="b-selector-wrapper">
+          <label for="comparison-algorithm-select">
+            Comparison Algorithm
+          </label>
+
+          <select id="comparison-algorithm-select"></select>
+        </div>
+
+        <div
+          class="complexity-title"
+          id="complexity-name-b">
+        </div>
+
+        <div
+          class="complexity-description"
+          id="complexity-description-b">
+        </div>
+
+        <table class="complexity-table">
+          <tr>
+            <td>Best</td>
+            <td id="complexity-best-b"></td>
+          </tr>
+
+          <tr>
+            <td>Average</td>
+            <td id="complexity-average-b"></td>
+          </tr>
+
+          <tr>
+            <td>Worst</td>
+            <td id="complexity-worst-b"></td>
+          </tr>
+
+          <tr>
+            <td>Space</td>
+            <td id="complexity-space-b"></td>
+          </tr>
+
+          <tr>
+            <td>Stable</td>
+            <td id="complexity-stable-b"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="metrics-b">
+
+        <div class="metric">
+          <span class="metric-label">Comparisons</span>
+          <span
+            class="metric-value"
+            id="metric-comparisons-b">
+            0
+          </span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-label">Swaps</span>
+          <span
+            class="metric-value"
+            id="metric-swaps-b">
+            0
+          </span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-label">Array Accesses</span>
+          <span
+            class="metric-value"
+            id="metric-accesses-b">
+            0
+          </span>
+        </div>
+
+      </div>
+
+    </aside>
+
+    <!-- Center Content -->
+    <main id="visualizer-container">
+
+      <div id="view-toggle">
+        <button id="btn-view-bar" class="active">
+          Bars
+        </button>
+
+        <button id="btn-view-dot">
+          Dots
+        </button>
+
+        <button id="btn-theme-toggle">
+          ☀️ Light
+        </button>
+      </div>
+
+      <!-- Primary Visualizer -->
+      <div id="visualizer"></div>
+
+      <div id="info-panel">
+        <p id="info-text">
+          Press Play to begin.
+        </p>
+      </div>
+
+      <!-- Comparison Visualizer -->
+      <div id="comparison-container" class="hidden">
+
+        <div id="visualizer-b"></div>
+
+        <div id="info-panel-b">
+          <p id="info-text-b">
+            Waiting...
+          </p>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Primary Sidebar -->
+    <aside id="sidebar-a">
+
+      <div id="complexity-panel">
+
+        <div
+          class="complexity-title"
+          id="complexity-name">
+        </div>
+
+        <div
+          class="complexity-description"
+          id="complexity-description">
+        </div>
+
+        <table class="complexity-table">
+          <tr>
+            <td>Best</td>
+            <td id="complexity-best"></td>
+          </tr>
+
+          <tr>
+            <td>Average</td>
+            <td id="complexity-average"></td>
+          </tr>
+
+          <tr>
+            <td>Worst</td>
+            <td id="complexity-worst"></td>
+          </tr>
+
+          <tr>
+            <td>Space</td>
+            <td id="complexity-space"></td>
+          </tr>
+
+          <tr>
+            <td>Stable</td>
+            <td id="complexity-stable"></td>
+          </tr>
+        </table>
+
+      </div>
+
+      <div id="metrics">
+
+        <div class="metric">
+          <span class="metric-label">Comparisons</span>
+          <span
+            class="metric-value"
+            id="metric-comparisons">
+            0
+          </span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-label">Swaps</span>
+          <span
+            class="metric-value"
+            id="metric-swaps">
+            0
+          </span>
+        </div>
+
+        <div class="metric">
+          <span class="metric-label">Array Accesses</span>
+          <span
+            class="metric-value"
+            id="metric-accesses">
+            0
+          </span>
+        </div>
+
+      </div>
+
+      <div id="dataset-controls">
+
+        <label>
+          Algorithm
+          <select id="algorithm-select"></select>
+        </label>
+
+        <label>
+          Size:
+          <span id="size-display">20</span>
+
+          <input
+            type="range"
+            id="size-slider"
+            min="5"
+            max="100"
+            value="20"
+            step="1">
+        </label>
+
+        <button id="btn-toggle-comparison">
+          Compare
+        </button>
+
+        <button id="btn-randomize">
+          Randomize
+        </button>
+
+        <label>
+          Custom Input
+
+          <input
+            type="text"
+            id="custom-input"
+            placeholder="e.g. 5,3,1,4,2">
+        </label>
+
+        <button id="btn-apply-custom">
+          Apply
+        </button>
+
+      </div>
+
+      <div id="controls">
+
+        <button id="btn-play">Play</button>
+        <button id="btn-pause">Pause</button>
+        <button id="btn-step-forward">⏭</button>
+        <button id="btn-step-backward">⏮</button>
+        <button id="btn-reset">Reset</button>
+
+        <label>
+          Speed
+
+          <input
+            type="range"
+            id="speed-slider"
+            min="50"
+            max="1000"
+            value="500"
+            step="50">
+        </label>
+
+        <span id="step-counter">
+          Step: 0 / 0
+        </span>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+  <script
+    type="module"
+    src="src/main.js">
+  </script>
+
+</body>
+</html>

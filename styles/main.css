@@ -1,0 +1,487 @@
+/* ============================================================
+   DESIGN TOKENS — DARK (default)
+   Terminal-inspired. Monospace. Signal over noise.
+   ============================================================ */
+
+:root {
+  --bg-primary:    #0d0d0d;
+  --bg-secondary:  #111111;
+  --bg-panel:      #161616;
+  --border-color:  #2a2a2a;
+  --border-accent: #3a3a3a;
+  --text-primary:  #e8e8e8;
+  --text-muted:    #666666;
+  --text-dim:      #444444;
+  --accent:        #00ff88;
+  --accent-dim:    #00cc6a;
+  --btn-bg:        #1a1a1a;
+  --btn-hover:     #242424;
+  --btn-border:    #333333;
+  --btn-active-border: #00ff88;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --panel-padding: 14px 16px;
+}
+
+/* ============================================================
+   LIGHT
+   ============================================================ */
+[data-theme="light"] {
+  --bg-primary:    #f5f5f5;
+  --bg-secondary:  #ffffff;
+  --bg-panel:      #fafafa;
+  --border-color:  #e0e0e0;
+  --border-accent: #cccccc;
+  --text-primary:  #111111;
+  --text-muted:    #777777;
+  --text-dim:      #aaaaaa;
+  --accent:        #0066cc;
+  --accent-dim:    #0055aa;
+  --btn-bg:        #eeeeee;
+  --btn-hover:     #e0e0e0;
+  --btn-border:    #cccccc;
+  --btn-active-border: #0066cc;
+}
+
+/* ============================================================
+   OCEAN — deep navy + electric cyan
+   ============================================================ */
+[data-theme="ocean"] {
+  --bg-primary:    #020b18;
+  --bg-secondary:  #041020;
+  --bg-panel:      #071628;
+  --border-color:  #0d2a45;
+  --border-accent: #134060;
+  --text-primary:  #cce8ff;
+  --text-muted:    #4a7fa8;
+  --text-dim:      #2a4f68;
+  --accent:        #00cfff;
+  --accent-dim:    #00a8d4;
+  --btn-bg:        #071628;
+  --btn-hover:     #0d2240;
+  --btn-border:    #0d2a45;
+  --btn-active-border: #00cfff;
+}
+
+/* ============================================================
+   FOREST — dark pine + amber ember
+   ============================================================ */
+[data-theme="forest"] {
+  --bg-primary:    #080f08;
+  --bg-secondary:  #0c140c;
+  --bg-panel:      #101a10;
+  --border-color:  #1c2e1c;
+  --border-accent: #2a3e2a;
+  --text-primary:  #d4e8c8;
+  --text-muted:    #5a7a50;
+  --text-dim:      #3a4e34;
+  --accent:        #f4a020;
+  --accent-dim:    #d08818;
+  --btn-bg:        #101a10;
+  --btn-hover:     #182618;
+  --btn-border:    #1c2e1c;
+  --btn-active-border: #f4a020;
+}
+
+/* ============================================================
+   SUNSET — deep violet + neon orange
+   ============================================================ */
+[data-theme="sunset"] {
+  --bg-primary:    #0e080f;
+  --bg-secondary:  #140c16;
+  --bg-panel:      #1a1020;
+  --border-color:  #2e1a35;
+  --border-accent: #3e2448;
+  --text-primary:  #f0d8ff;
+  --text-muted:    #7a5090;
+  --text-dim:      #4a3060;
+  --accent:        #ff6a00;
+  --accent-dim:    #dd5500;
+  --btn-bg:        #1a1020;
+  --btn-hover:     #241828;
+  --btn-border:    #2e1a35;
+  --btn-active-border: #ff6a00;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 20px;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+#app {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  max-width: 1440px;
+  align-items: flex-start;
+}
+
+#sidebar-a,
+#sidebar-b {
+  width: 230px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#visualizer-container {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============================================================
+   VIEW TOGGLE
+   ============================================================ */
+
+#view-toggle {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ============================================================
+   VISUALIZER CANVAS
+   ============================================================ */
+
+#visualizer,
+#visualizer-b {
+  width: 100%;
+  height: 280px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  display: block;
+}
+
+#comparison-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ============================================================
+   INFO PANEL
+   ============================================================ */
+
+#info-panel,
+#info-panel-b {
+  min-height: 52px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+#info-text,
+#info-text-b {
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+#info-text::before,
+#info-text-b::before {
+  content: '> ';
+  color: var(--accent);
+}
+
+/* ============================================================
+   COMPLEXITY PANEL
+   ============================================================ */
+
+#complexity-panel,
+#complexity-panel-b {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--panel-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.complexity-title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+}
+
+.complexity-description {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-family: var(--font-sans);
+}
+
+.complexity-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+}
+
+.complexity-table tr {
+  border-top: 1px solid var(--border-color);
+}
+
+.complexity-table tr:first-child {
+  border-top: none;
+}
+
+.complexity-table td {
+  padding: 4px 0;
+  color: var(--text-muted);
+}
+
+.complexity-table td:last-child {
+  color: var(--accent);
+  text-align: right;
+  font-weight: 600;
+}
+
+/* ============================================================
+   METRICS
+   ============================================================ */
+
+#metrics,
+#metrics-b {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 12px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+}
+
+.metric-label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.metric-value {
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* ============================================================
+   DATASET CONTROLS
+   ============================================================ */
+
+#dataset-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#dataset-controls label,
+#b-selector-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+#dataset-controls select,
+#dataset-controls input[type="text"],
+#comparison-algorithm-select {
+  width: 100%;
+  padding: 6px 8px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#dataset-controls select:focus,
+#dataset-controls input[type="text"]:focus,
+#comparison-algorithm-select:focus {
+  border-color: var(--accent);
+}
+
+#dataset-controls input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* Size display */
+#size-display {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ============================================================
+   CONTROLS / PLAYBACK
+   ============================================================ */
+
+#controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+#step-counter {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  width: 100%;
+  padding-top: 4px;
+}
+
+/* Speed label */
+#controls label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+#controls input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+button {
+  padding: 6px 12px;
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--btn-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+  white-space: nowrap;
+}
+
+button:hover:not(:disabled) {
+  background: var(--btn-hover);
+  border-color: var(--border-accent);
+}
+
+button:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+button.active {
+  border-color: var(--btn-active-border);
+  color: var(--accent);
+}
+
+/* Play button gets a stronger accent treatment */
+#btn-play:not(:disabled) {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+#btn-play:hover:not(:disabled) {
+  background: var(--btn-hover);
+  border-color: var(--accent);
+}
+
+/* ============================================================
+   COMPARISON SELECTOR WRAPPER
+   ============================================================ */
+
+#b-selector-wrapper {
+  margin-bottom: 6px;
+}
+
+#b-selector-wrapper label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+   SCROLLBAR (webkit)
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-accent);
+  border-radius: 3px;
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+
+.hidden {
+  display: none !important;
+}
